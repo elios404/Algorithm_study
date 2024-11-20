@@ -8,13 +8,12 @@ for T in range(test_num):
     turn = 0
     arr_turn = []
     while(True):
-        if turn > n:
-            if turn%(n-1) == 0:
-                if arr_turn == list(arr): #반복해도 달라지지 않는다면
-                    turn = -1
-                    break
-                else :
-                    arr_turn = [a for a in arr]
+        if turn%n == 0:
+            if arr_turn == arr: #반복해도 달라지지 않는다면
+                turn = -1
+                break
+            else :
+                arr_turn = arr
 
         Finish = True
         check_num = arr[0]
@@ -32,4 +31,6 @@ for T in range(test_num):
             arr.append(k_num)
             turn += 1
 
+
+    
     print(f"#{T+1} {turn}")
