@@ -1,0 +1,4 @@
+In java char type can be changed into number, if I use operator such as + or -
+so can know the ascii code number by add 0, change into number
+Also if you want to print several char type with character
+can print with "" int the front then use + operator

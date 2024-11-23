@@ -1,0 +1,55 @@
+if need to compare several simple conditions then
+case function can be one of the options
+and when use the same code in different conditions then
+write down several conditions at once
+
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        String[] word = sc.nextLine().split("");
+        int counter = 0;
+        int idx = 0;
+        while (idx < word.length) {
+            counter++;
+            switch (word[idx]) {
+                case "c":
+                    if (idx != word.length - 1) {
+                        String next_one = word[idx + 1];
+                        if (next_one.equals("=") || next_one.equals("-")) idx++;
+                    }
+                    break;
+                case "d":
+                    if (idx != word.length - 1) {
+                        String next_one = word[idx + 1];
+                        if (idx < word.length -2) {
+                            String next_two = word[idx + 1] + word[idx + 2];
+                            if (next_two.equals("z=")) idx += 2;
+                        }
+                        if (next_one.equals("-")) idx++;
+                    }
+                    break;
+                case "l":
+                case "n":
+                    if (idx != word.length - 1) {
+                        String next_one = word[idx + 1];
+                        if (next_one.equals("j")) idx++;
+                    }
+                    break;
+                case "s":
+                case "z":
+                    if (idx != word.length - 1) {
+                        String next_one = word[idx + 1];
+                        if (next_one.equals("=")) idx++;
+                    }
+            }
+            idx++;
+        }
+
+        System.out.println(counter);
+        sc.close();
+    }
+}
