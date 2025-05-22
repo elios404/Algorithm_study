@@ -1,36 +1,32 @@
-#조건을 보면 시간이 짧다. 아마 해시로 시간을 절약해야 할 듯 하다.
-#어느 숫자 옆에 다른 숫자가 있는지 확인하고 저장한다면?
+def make_number(row, col, seq, number):
+    global grid, number_can_make
+    number = number*10 + grid[row][col]
+    if seq == 7:
+        number_can_make.add(number)
+        return
+    move_y = [0,1,0,-1] #세로이동 row 이동
+    move_x = [1,0,-1,0] #가로이동 col 이동
 
-test_num = int(input())
-
-for T in range(test_num):
-    arr = []
     for i in range(4):
-        l = list(input().split())
-        arr.append(l)
+        new_row = row+move_y[i]
+        new_col = col+move_x[i]
+        if new_row >= 0 and new_row < 4 and new_col >= 0 and new_col < 4:
+            make_number(new_row, new_col, seq+1,number)
+
+
+T = int(input())
+
+for test_case in range(1,T+1):
+    grid = []
+    for _ in range(4):
+        row = list(map(int,input().split()))
+        grid.append(row)
     
-    near_dict = {}
-    dy = [-1,0,1,0]; dx = [0,-1,0,1]
+    number_can_make = set()
+
     for i in range(4):
         for j in range(4):
-            val = arr[i][j]
-            for k in range(4):
-                ny, nx = i+dy[k], j+dx[k]
-                if 0 <= ny < 4 and 0 <= nx < 4:
-                    near_val = arr[ny][nx]
-                    if val not in near_dict : near_dict[val] = set(near_val)
-                    else : near_dict[val].add(near_val)
+            make_number(i,j,1,0)
     
-    keys = near_dict.keys()
-    for i in range(6):
-        next_keys = set()
-        for key in keys:
-            last_s = key[-1]
-            can_come = near_dict[last_s] #set
-            for come in can_come:
-                next_key = key+come
-                next_keys.add(next_key)
-        keys = next_keys
-        print(keys)
-    
-    print(f"#{T+1} {len(keys)}")
+    #print(number_can_make)
+    print(f"#{test_case} {len(number_can_make)}")
